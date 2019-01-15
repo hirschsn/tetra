@@ -61,11 +61,15 @@ Octagon::Octagon(const std::array<Vec3d, 8> &vertices) {
 }
 
 Octagon::~Octagon() {
-    delete oi;
+    if (oi)
+        delete oi;
 }
 
 bool Octagon::contains(const Vec3d &p) const
 {
+    if (!oi)
+        throw std::runtime_error("contains() on empty octagon");
+
     return oi->contains(__detail::to_cgal(p));
 }
 
