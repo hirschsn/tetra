@@ -18,7 +18,7 @@ typedef std::array<double, 3> Vec3d;
 struct Octagon {
     Octagon(const std::array<Vec3d, 8> &vertices);
     ~Octagon();
-    bool contains(const Vec3d &p);
+    bool contains(const Vec3d &p) const;
 
 private:
     __detail::_Octagon_Impl *oi;

@@ -18,7 +18,7 @@ typedef Triangulation::Locate_type    Locate_type;
 struct _Octagon_Impl
 {
     _Octagon_Impl(const std::array<Point, 8> &vertices);
-    bool contains(const Point &p);
+    bool contains(const Point &p) const;
 
 private:
     const Triangulation T;
@@ -27,7 +27,7 @@ private:
 _Octagon_Impl::_Octagon_Impl(const std::array<Point, 8> &vertices)
     : T(vertices.begin(), vertices.end()) {}
 
-bool _Octagon_Impl::contains(const Point &p)
+bool _Octagon_Impl::contains(const Point &p) const
 {
     Locate_type lt;
     int li, lj;
@@ -64,7 +64,7 @@ Octagon::~Octagon() {
     delete oi;
 }
 
-bool Octagon::contains(const Vec3d &p)
+bool Octagon::contains(const Vec3d &p) const
 {
     return oi->contains(__detail::to_cgal(p));
 }
