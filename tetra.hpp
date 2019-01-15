@@ -15,6 +15,10 @@ struct _Octagon_Impl;
 
 typedef std::array<double, 3> Vec3d;
 
+inline Vec3d make_vec3d(double p[3]) {
+    return {{p[0], p[1], p[2]}};
+}
+
 struct Octagon {
     Octagon(const std::array<Vec3d, 8> &vertices);
     ~Octagon();
