@@ -20,8 +20,24 @@ struct Randgen
     std::uniform_real_distribution<> d;
 };
 
+
+int ninside(const std::array<tetra::Vec3d, 8>& cs, int N)
+{
+    auto o = tetra::Octagon{cs};
+    auto rnd = Randgen{};
+    int n = 0;
+
+    for (int i = 0; i < N; ++i) {
+        tetra::Vec3d p = tetra::Vec3d{rnd(), rnd(), rnd()};
+        if (o.contains(p))
+            n++;
+    }
+    return n;
+}
+
 int main()
 {
+    // 50% of the volume of the unit cube
     std::array<tetra::Vec3d, 8> cs = {tetra::Vec3d{0, .5,  0},
                                       tetra::Vec3d{0,  0, .5},
                                       tetra::Vec3d{0,  1, .5},
@@ -31,28 +47,11 @@ int main()
                                       tetra::Vec3d{1,  1, .5},
                                       tetra::Vec3d{1, .5,  1}};
 
-    auto o = tetra::Octagon{cs};
+    const int N = 1'000'000;
 
-    auto rnd = Randgen{};
+    int n = ninside(cs, N);
 
-//    std::vector<tetra::Vec3d> ps = {
-//        {1.5, .5, .5}, {1.25, .25, .25}, {1.75, .75, .75},
-//        {.5, 1.5, .5}, {.25, 1.25, .25}, {.75, 1.75, .75},
-//        {.5, .5, 1.5}, {.25, .25, 1.25}, {.75, .75, 1.75},
-//    };
-//
-    //for (const auto& p: ps) {
-    int ncontains = 0;
-    for (int i = 0; i < 10; ++i) {
-        tetra::Vec3d p = tetra::Vec3d{rnd(), rnd(), rnd()};
-
-        printf("%4.2lf %4.2lf %4.2lf: ", p[0], p[1], p[2]);
-        puts(o.contains(p)? "true": "false");
-
-        //if (o.contains(p))
-        //    ncontains++;
-    }
-    return ncontains;
+    printf("%5.2lf%%\n", n * 100.0 / N);
 }
 
 //#include <array>
