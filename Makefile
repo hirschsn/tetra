@@ -4,7 +4,7 @@
 
 # Configuration
 #CXXFLAGS = -Og -g3 -ggdb -Wall -Wextra --std=c++11 -fsanitize=address
-CXXFLAGS = -O3
+CXXFLAGS = -O3 --std=c++14
 
 CXX = g++
 RANLIB = ranlib
@@ -13,6 +13,7 @@ AR = ar
 ###
 
 LIBTETRA = libtetra.a
+LIBTETRA_SHR = libtetra.so
 LIBTETRA_SRC = tetra.cpp
 LIBTETRA_OBJ = $(LIBTETRA_SRC:.cpp=.o)
 LIBTETRA_HDR = tetra.hpp
@@ -22,23 +23,26 @@ PROG_OBJ = $(PROG_SRC:.cpp=.o)
 PROG = test
 
 
-all: $(LIBTETRA) test
+all: $(LIBTETRA) $(LIBTETRA_SHR) test
 
 $(LIBTETRA): $(LIBTETRA_OBJ)
 	$(AR) rc $@ $?
 	$(RANLIB) $@
+
+$(LIBTETRA_SHR): $(LIBTETRA_OBJ)
+	$(CXX) -shared -o $@ $<
 
 $(LIBTETRA_OBJ): $(LIBTETRA_HDR)
 
 $(PROG_OBJ): $(LIBTETRA_HDR)
 
 .cpp.o:
-	$(CXX) $(CXXFLAGS) -o $@ -c $<
+	$(CXX) -fPIC $(CXXFLAGS) -o $@ -c $<
 
 $(PROG): $(LIBTETRA)
 
 .o:
-	$(CXX) $(CXXFLAGS) -L. -I. -o $@ $< -ltetra -lCGAL -lgmp
+	$(CXX) -static $(CXXFLAGS) -L. -I. -o $@ $< -ltetra -lCGAL -lgmp
 
 
 clean:
