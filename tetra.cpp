@@ -62,6 +62,17 @@ Octagon::Octagon(const std::array<Vec3d, 8> &vertices) {
     oi = new __detail::_Octagon_Impl(__detail::to_cgal(vertices));
 }
 
+Octagon::Octagon(Octagon&& o): oi(std::move(o.oi)) {}
+
+
+void swap(Octagon& a, Octagon& b) {
+    std::swap(a.oi, b.oi);
+}
+
+void Octagon::operator=(Octagon o) {
+    swap(*this, o);
+}
+
 Octagon::~Octagon() {
     if (oi)
         delete oi;

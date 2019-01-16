@@ -22,11 +22,17 @@ inline Vec3d make_vec3d(double p[3]) {
 struct Octagon {
     Octagon();
     Octagon(const std::array<Vec3d, 8> &vertices);
+    Octagon(const Octagon& o) = delete;
+    Octagon(Octagon&& o);
     ~Octagon();
+    void operator=(Octagon o);
+
     bool contains(const Vec3d &p) const;
 
 private:
     __detail::_Octagon_Impl *oi;
+
+    friend void swap(Octagon&, Octagon&);
 };
 
 } // namespace tetra
