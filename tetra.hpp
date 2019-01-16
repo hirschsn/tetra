@@ -20,7 +20,7 @@ inline Vec3d make_vec3d(double p[3]) {
 }
 
 struct Octagon {
-    Octagon() {}
+    Octagon();
     Octagon(const std::array<Vec3d, 8> &vertices);
     ~Octagon();
     bool contains(const Vec3d &p) const;

@@ -56,6 +56,8 @@ static std::array<Point, N> to_cgal(const std::array<Vec3d, N> &vs)
 } // namespace __detail
 
 
+Octagon::Octagon(): oi(nullptr) {}
+
 Octagon::Octagon(const std::array<Vec3d, 8> &vertices) {
     oi = new __detail::_Octagon_Impl(__detail::to_cgal(vertices));
 }
