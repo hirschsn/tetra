@@ -56,14 +56,14 @@ static std::array<Point, N> to_cgal(const std::array<Vec3d, N> &vs)
 } // namespace __detail
 
 
-Octagon::Octagon(): oi(nullptr) {}
+// These are declared here because _Octagon_Impl is an imcomplete type in the header.
+Octagon::Octagon() = default;
+Octagon::~Octagon() = default;
+Octagon::Octagon(Octagon&& o) = default;
 
 Octagon::Octagon(const std::array<Vec3d, 8> &vertices) {
-    oi = new __detail::_Octagon_Impl(__detail::to_cgal(vertices));
+    oi = std::make_unique<__detail::_Octagon_Impl>(__detail::_Octagon_Impl(__detail::to_cgal(vertices)));
 }
-
-Octagon::Octagon(Octagon&& o): oi(std::move(o.oi)) {}
-
 
 void swap(Octagon& a, Octagon& b) {
     std::swap(a.oi, b.oi);
@@ -71,11 +71,6 @@ void swap(Octagon& a, Octagon& b) {
 
 void Octagon::operator=(Octagon o) {
     swap(*this, o);
-}
-
-Octagon::~Octagon() {
-    if (oi)
-        delete oi;
 }
 
 bool Octagon::contains(const Vec3d &p) const

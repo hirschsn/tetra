@@ -3,6 +3,7 @@
 #define TETRA_HPP_INCLUDED
 
 #include <array>
+#include <memory>
 
 namespace tetra
 {
@@ -30,7 +31,7 @@ struct Octagon {
     bool contains(const Vec3d &p) const;
 
 private:
-    __detail::_Octagon_Impl *oi;
+    std::unique_ptr<__detail::_Octagon_Impl> oi;
 
     friend void swap(Octagon&, Octagon&);
 };
