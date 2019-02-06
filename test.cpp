@@ -53,3 +53,4 @@ int main()
 
     printf("%5.2lf%%\n", n * 100.0 / N);
 }
+
