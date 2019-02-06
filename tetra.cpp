@@ -1,6 +1,7 @@
 
 #include "tetra.hpp"
 
+#define CGAL_DISABLE_ROUNDING_MATH_CHECK
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Triangulation_3.h>
 
@@ -81,4 +82,10 @@ bool Octagon::contains(const Vec3d &p) const
     return oi->contains(__detail::to_cgal(p));
 }
 
+bool Octagon::contains(double x, double y, double z) const
+{
+    return contains({{x, y, z}});
+}
+
 } // namespace tetra
+
