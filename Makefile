@@ -46,6 +46,7 @@ $(PROG): $(LIBTETRA)
 
 
 clean:
-	rm -rf $(LIBTETRA) $(LIBTETRA_OBJ) $(PROG) $(PROG_OBJ)
+	rm -rf $(LIBTETRA) $(LIBTETRA_SHR) $(LIBTETRA_OBJ) $(PROG) $(PROG_OBJ)
 
 .PHONY: all clean
+
