@@ -3,8 +3,8 @@
 .SUFFIXES: .o .cpp
 
 # Configuration
-#CXXFLAGS = -Og -g3 -ggdb -Wall -Wextra --std=c++11 -fsanitize=address
-CXXFLAGS = -O3 --std=c++14
+#CXXFLAGS = -Og -g3 -ggdb -Wall -Wextra --std=c++14 -fsanitize=address
+CXXFLAGS = -O3 --std=c++14 -flto
 
 CXX = g++
 RANLIB = ranlib

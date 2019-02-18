@@ -9,10 +9,9 @@ namespace tetra
 {
 
 namespace __detail {
-// Opaque struct to reduce compile times on include site
+// Opaque struct to reduce compile times on inclusion site
 struct _Octagon_Impl;
 }
-
 
 typedef std::array<double, 3> Vec3d;
 
@@ -30,7 +29,6 @@ struct Octagon {
 
     bool contains(const Vec3d &p) const;
     bool contains(double x, double y, double z) const;
-    
 
 private:
     std::unique_ptr<__detail::_Octagon_Impl> oi;
