@@ -37,6 +37,7 @@ static bool contains(const _Octagon_Impl &oi, const Vec3d &v)
     Locate_type lt;
     int li, lj;
     oi.T.locate(p, lt, li, lj);
+    // Also accepts corners, edges of the polygon
     return lt <= Triangulation::CELL;
 }
 
