@@ -3,8 +3,8 @@
 .SUFFIXES: .o .cpp
 
 # Configuration
-#CXXFLAGS = -Og -g3 -ggdb -Wall -Wextra --std=c++14 -fsanitize=address
-CXXFLAGS = -O3 --std=c++14 -flto
+#CXXFLAGS = -Og -g3 -ggdb -Wall -Wextra --std=c++14
+CXXFLAGS = -O3 -g3 -ggdb --std=c++14
 
 CXX = g++
 RANLIB = ranlib
@@ -39,10 +39,10 @@ $(PROG_OBJ): $(LIBTETRA_HDR)
 .cpp.o:
 	$(CXX) -fPIC $(CXXFLAGS) -o $@ -c $<
 
-$(PROG): $(LIBTETRA)
+$(PROG): $(LIBTETRA_SHR)
 
 .o:
-	$(CXX) -static $(CXXFLAGS) -L. -I. -o $@ $< -ltetra -lCGAL -lgmp
+	$(CXX) $(CXXFLAGS) -L. -I. -o $@ $< -ltetra -lCGAL -lgmp
 
 
 clean:
