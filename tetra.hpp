@@ -1,3 +1,4 @@
+// See LICENSE for license details.
 
 #ifndef TETRA_HPP_INCLUDED
 #define TETRA_HPP_INCLUDED
