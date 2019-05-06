@@ -48,5 +48,8 @@ $(PROG): $(LIBTETRA_SHR)
 clean:
 	rm -rf $(LIBTETRA) $(LIBTETRA_SHR) $(LIBTETRA_OBJ) $(PROG) $(PROG_OBJ)
 
-.PHONY: all clean
+check: all
+	env LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./test
+
+.PHONY: all clean check
 
