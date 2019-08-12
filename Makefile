@@ -5,6 +5,7 @@
 # Configuration
 #CXXFLAGS = -Og -g3 -ggdb -Wall -Wextra --std=c++14
 CXXFLAGS = -O3 -g3 -ggdb --std=c++14
+PREFIX = /usr/local
 
 CXX = g++
 RANLIB = ranlib
@@ -50,6 +51,13 @@ clean:
 
 check: all
 	env LD_LIBRARY_PATH=.:$LD_LIBRARY_PATH ./test
+
+install: $(LIBTETRA)
+	mkdir -p $(PREFIX)/lib
+	mkdir -p $(PREFIX)/include/tetra
+	cp -f $(LIBTETRA) $(PREFIX)/lib
+	cp -f $(LIBTETRA_HDR) $(PREFIX)/include/tetra
+
 
 .PHONY: all clean check
 
